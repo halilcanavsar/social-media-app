@@ -61,4 +61,6 @@ export const login = async (req, res) => {
       .json({ user });
   });
 };
-export const logout = async (req, res) => {};
+export const logout = async (req, res) => {
+  //aaa
+};
