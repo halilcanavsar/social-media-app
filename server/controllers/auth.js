@@ -62,5 +62,13 @@ export const login = async (req, res) => {
   });
 };
 export const logout = async (req, res) => {
-  //aaa
+  res
+    .clearCookie('accessToken', {
+      //specify whether the cookie should only be transmitted over HTTPS, a secure connection
+      secure: true,
+      //specify whether the cookie should be sent only over HTTP(S), and not made available to client-side JavaScript
+      sameSite: 'none',
+    })
+    .status(200)
+    .json({ message: 'Logged out' });
 };

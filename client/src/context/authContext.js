@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
@@ -8,14 +9,11 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem('user')) || null
   );
 
-  //TODO: We are going to create a login function
-  const login = () => {
-    setCurrentUser({
-      id: 1,
-      name: 'John Doe',
-      profilePicture:
-        'https://images.pexels.com/photos/697509/pexels-photo-697509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  const login = async (inputs) => {
+    const res = await axios.post('http://localhost:8800/auth/login', inputs, {
+      withCredentials: true,
     });
+    setCurrentUser(res.data);
   };
 
   //We are using JSON.stringify to convert object to string. Because we can not save object to local storage. We can only save string.

@@ -11,8 +11,19 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 //middlewares
+app.use((req, res, next) => {
+  //this is to allow cross origin requests. This is to allow requests from different domains.
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  })
+);
 app.use(cookieParser());
 
 app.use('/auth', authRoutes);
@@ -21,7 +32,7 @@ app.use('/posts', postRoutes);
 app.use('/likes', likeRoutes);
 app.use('/comments', commentRoutes);
 
-const PORT = process.env.PORT || 8803;
+const PORT = process.env.PORT || 8800;
 
 app.listen(PORT, () => {
   console.log(`Backend server is running on port ${PORT}`);
