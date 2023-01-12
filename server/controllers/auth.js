@@ -58,7 +58,8 @@ export const login = async (req, res) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ user });
+      //if you put {user} it will send the user as an object. If you put user it will send the user as an array.
+      .json(user);
   });
 };
 export const logout = async (req, res) => {

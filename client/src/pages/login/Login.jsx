@@ -17,7 +17,6 @@ function Login() {
     setInputs((prev) => ({ ...prev, [name]: value }));
   };
   const { login } = useContext(AuthContext);
-
   const handleClick = async (e) => {
     e.preventDefault();
     try {

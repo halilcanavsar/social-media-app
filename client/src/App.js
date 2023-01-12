@@ -16,6 +16,9 @@ import Profile from './pages/profile/Profile';
 import './style.scss';
 import { DarkModeContext } from './context/darkModeContext';
 import { AuthContext } from './context/authContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -72,9 +75,11 @@ function App() {
   ]);
 
   return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </QueryClientProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import './leftBar.scss';
 import Friends from '../../assets/1.png';
 import Groups from '../../assets/2.png';
@@ -22,7 +22,7 @@ function LeftBar() {
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img src={currentUser.profilePicture} alt="" />
+            <img src={currentUser.profilePic} alt="" />
             <span>{currentUser.name}</span>
           </div>
           <div className="item">
