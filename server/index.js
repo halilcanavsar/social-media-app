@@ -6,6 +6,7 @@ import likeRoutes from './routes/likes.js';
 import commentRoutes from './routes/comments.js';
 import authRoutes from './routes/auth.js';
 import cors from 'cors';
+import multer from 'multer';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -25,6 +26,31 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '../client/public/uploads');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      const error = new Error('Please upload a file');
+      error.httpStatusCode = 400;
+      return next(error);
+    }
+    res.status(200).json(file.filename);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
