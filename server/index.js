@@ -5,6 +5,7 @@ import postRoutes from './routes/posts.js';
 import likeRoutes from './routes/likes.js';
 import commentRoutes from './routes/comments.js';
 import authRoutes from './routes/auth.js';
+import relationshipRoutes from './routes/relationships.js';
 import cors from 'cors';
 import multer from 'multer';
 import cookieParser from 'cookie-parser';
@@ -57,6 +58,7 @@ app.use('/users', userRoutes);
 app.use('/posts', postRoutes);
 app.use('/likes', likeRoutes);
 app.use('/comments', commentRoutes);
+app.use('/relationships', relationshipRoutes);
 
 const PORT = process.env.PORT || 8800;
 
